@@ -11,10 +11,14 @@ import ar from "date-fns/locale/ar"; // Import the Arabic locale from date-fns
 import { useState } from "react";
 import { FaPhoneAlt } from "react-icons/fa";
 import { IoMail } from "react-icons/io5";
-
+import { useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import MyFooter from "../Footer/MyFooter";
 
 const ViewChalet = () => {
+
+  //const dispatch = useDispatch()
+
   const [selectedDate1, setSelectedDate1] = useState(null); // State for first DatePicker
   const [selectedDate2, setSelectedDate2] = useState(null); // State for second DatePicker
 
@@ -34,6 +38,15 @@ const ViewChalet = () => {
     const options = { day: "numeric", month: "long", year: "numeric" };
     return date.toLocaleDateString("ar", options); // Format the date in Arabic
   };
+
+
+  
+  // const getStatusBook = useSelector((state) => state.AllChalet.statusBook);
+  // const isLoading = useSelector((state) => state.AllChalet.isLoading);
+ 
+  //console.log(getStatusBook)
+
+
   return (
     <>
       <Container>

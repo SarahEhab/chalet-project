@@ -3,8 +3,31 @@ import MyNavbar from "../Navbar/MyNavbar";
 import { Container, Row, Col } from "react-bootstrap";
 import { Link } from "react-router-dom";
 import MyFooter from "../Footer/MyFooter";
+// import { useDispatch } from 'react-redux';
+// import { useSelector } from 'react-redux';
 
 const Home = () => {
+
+
+
+  // const dispatch = useDispatch()
+  // const getChaletAll = useSelector((state) => state.AllChalet.allCahlet);
+  // const isLoading = useSelector((state) => state.AllChalet.isLoading);
+ 
+  // console.log(getChaletAll)
+
+
+  
+  // const getAllchaletBook = useSelector((state) => state.AllChalet.allBookChalet);
+  // const isLoading = useSelector((state) => state.AllChalet.isLoading);
+ 
+  // console.log(getAllchaletBook)
+
+
+
+
+
+
   return (
     <>
       <Container>
@@ -185,7 +208,7 @@ const Home = () => {
 
 
 
-        <div style={{ display: "flex", justifyContent: "space-between", marginTop:'50px'}}>
+        {/* <div style={{ display: "flex", justifyContent: "space-between", marginTop:'50px'}}>
           <span style={{fontSize:'18px',fontWeight:'500'}}>الشاليهات المتاحة الان <span  style={{color:'#547AFF'}}>( بيع )</span></span>
           <span style={{color:'#547AFF',cursor:'pointer'}}>عرض الكل</span>
 
@@ -322,7 +345,7 @@ const Home = () => {
 
         
 
-        </Row>
+        </Row> */}
 
 
 
