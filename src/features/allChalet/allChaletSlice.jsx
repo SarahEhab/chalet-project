@@ -6,6 +6,7 @@ const initialState = {
    allCahlet:[],
    allBookChalet:[],
    statusBook:[],
+   bookChalet:[],
     isLoading: false,
     error: null,
   };
@@ -69,6 +70,31 @@ const initialState = {
 
   
   
+    const bookOneChalet = createAsyncThunk(  'book/onechalet', async (formData , thunkAPI) => {
+      try {
+        const response = await baseUrl.post(
+          'Bookshalihat/store',
+          formData,
+          {
+            params: {
+              name: formData.name,
+              date_arrival: formData.date_arrival,
+              Departure_Date: formData.Departure_Date,
+              phone : formData.phone
+            }
+            // ,headers: {
+            //   Authorization:` Bearer ${token}` // Enclose the token interpolation in backticks
+            // }
+          }
+        );
+        console.log(response);
+        return response.data;
+      } catch (error) {
+        // You might want to handle errors more appropriately here
+        return thunkAPI.rejectWithValue(error.message);
+      }
+    }
+  );
 
 
 
@@ -122,6 +148,21 @@ const initialState = {
               state.isLoading = false;
               state.error = action.payload;
             })
+
+
+            .addCase(bookOneChalet.pending, (state) => {
+              state.isLoading = true;
+              state.error = null;
+            })
+            .addCase(bookOneChalet.fulfilled, (state, action) => {
+              state.bookChalet = action.payload;
+              state.isLoading = false;
+              state.error = null;
+            })
+            .addCase(bookOneChalet.rejected, (state, action) => {
+              state.isLoading = false;
+              state.error = action.payload;
+            })
             
   
   
@@ -129,6 +170,6 @@ const initialState = {
 
             }}
             );
-      export { getAllChalet , getAllBookChalet , getStatusBook};
+      export { getAllChalet , getAllBookChalet , getStatusBook ,bookOneChalet };
       
       export default allChaletSlice.reducer;

@@ -13,6 +13,7 @@ const initialState = {
   try {
     const response = await baseUrl.post(
       'Auth/Authentication_Code_broker',formData);
+    console.log(response);
     console.log(response.data);
     return response.data;
   } catch (error) {
@@ -25,7 +26,8 @@ const initialState = {
   try {
     const response = await baseUrl.post(
       'Auth/Authentication_Code_chalet',formData);
-    console.log(response.data);
+      console.log(response);
+      console.log(response.data);
     return response.data;
   } catch (error) {
     return error

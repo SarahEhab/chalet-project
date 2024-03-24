@@ -10,14 +10,24 @@ import "react-datepicker/dist/react-datepicker.css";
 import ar from 'date-fns/locale/ar'; // Import the Arabic locale from date-fns
 import { useState } from 'react';
 import MyFooter from '../Footer/MyFooter';
+import { useDispatch , useSelector} from 'react-redux';
+import { bookOneChalet } from '../../features/allChalet/allChaletSlice';
 
 const Determine = () => {
+  const dispatch = useDispatch();
+
+
+
+
+
   const [selectedDate1, setSelectedDate1] = useState(null); // State for first DatePicker
   const [selectedDate2, setSelectedDate2] = useState(null); // State for second DatePicker
 
   const handleDateChange1 = (date) => {
     setSelectedDate1(date); // Update state for first DatePicker
   };
+  
+
 
   const handleDateChange2 = (date) => {
     setSelectedDate2(date); // Update state for second DatePicker
@@ -31,6 +41,57 @@ const Determine = () => {
     const options = { day: 'numeric', month: 'long', year: 'numeric' };
     return date.toLocaleDateString('ar', options); // Format the date in Arabic
   }
+
+
+
+
+
+
+  const res = useSelector((state) => state.AllChalet.bookChalet);
+
+  const isLoading = useSelector((state) => state.AllChalet.isLoading);
+  const error = useSelector((state) => state.AllChalet.error);
+   console.log(res)
+
+
+   const [name, setName] = useState("");
+   const [dateArrivalState, setDateArrivalState] = useState("");
+   const [dateDepartureState, setDateDepartureState] = useState("");
+   const [phone, setPhone] = useState("");
+   
+   const handleChangeName = (e) => {
+    setName(e.target.value);
+   };
+   
+   const handleChangeDateArrival = (e) => {
+    setDateArrivalState(e.target.value);
+   };
+   
+   const handleChangeDateDeparture = (e) => {
+    setDateDepartureState(e.target.value);
+   };
+    
+   const handleChangePhone = (e) => {
+    setPhone(e.target.value);
+   };
+    
+   const handleSubmit = (e) => {
+     e.preventDefault();
+     const formData = {
+      name: name,
+      date_arrival: selectedDate1,
+      Departure_Date: selectedDate2,
+       phone : phone
+     };
+     dispatch(bookOneChalet(formData));
+   };
+
+
+
+
+
+
+
   return (
     <>
     <Container>
@@ -78,7 +139,10 @@ const Determine = () => {
       className='date-design'
       minDate={new Date()}
       selected={selectedDate1} // Pass the selected date state
+
+      
       onChange={handleDateChange1} // Handle date change
+      
       value={selectedDate1 ? formatDate(selectedDate1) : ''} // Displayed value
 
       />
@@ -114,13 +178,18 @@ const Determine = () => {
     <Col lg={6}>
       <Form.Group className="mb-3" controlId="formName">
         <Form.Label style={{fontWeight:'500'}}>الأسم</Form.Label>
-        <Form.Control type="text" placeholder="الأسم" />
+        <Form.Control 
+        value={name} // Use state variable here
+  onChange={(e) => handleChangeName(e)}
+        type="text" placeholder="الأسم" />
       </Form.Group>
     </Col>
     <Col lg={6}>
       <Form.Group className="mb-3" controlId="formPhone">
         <Form.Label style={{fontWeight:'500'}}>رقم الهاتف</Form.Label>
-        <Form.Control type="tel" placeholder="رقم الهاتف"  style={{textAlignLast:'end'}}/>
+        <Form.Control value={phone} // Use state variable here
+  onChange={(e) => handleChangePhone(e)}
+         type="tel" placeholder="رقم الهاتف"  style={{textAlignLast:'end'}}/>
       </Form.Group>
     </Col>
   </Row>
@@ -150,7 +219,8 @@ const Determine = () => {
         </div>
         </Col>
         <Col lg={12} style={{display:'flex',justifyContent:'center'}}>
-        <Button style={{backgroundColor:'#547AFF',color:'white',width:'350px'}}>حجز الأن</Button>
+        <Button onClick={handleSubmit}
+        style={{backgroundColor:'#547AFF',color:'white',width:'350px'}}>حجز الأن</Button>
         </Col>
       </Row>
     </Container>

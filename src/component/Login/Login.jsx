@@ -1,30 +1,34 @@
 import { Container, Row, Col,Form ,Button} from "react-bootstrap";
 import loginImg from "../../assets/images/login.svg";
 import './Login.css'
-import { createLoginUser } from "../../features/Auth/AuthSlicle";
+import { createLoginUser, createUserOwnerChalet } from "../../features/Auth/AuthSlicle";
+import { useDispatch, useSelector } from "react-redux";
+import { useState } from "react";
 
 const Login = () => {
 
-  // const dispatch = useDispatch();
-  // const navigate = useNavigate();
-  // const [state, setState] = useState({
-  //   Registration_code: ""
+   const dispatch = useDispatch();
+  //const navigate = useNavigate();
+  const [state, setState] = useState({
+    Registration_code: ""
    
-  // }); 
+  }); 
 
   // Destructure state object for easier access
- // const { Registration_code } = state;
+  const { Registration_code } = state;
 
   // Function to handle input changes
   const handleInputChange = (fieldName) => (e) => {
     setState((prevState) => ({ ...prevState, [fieldName]: e.target.value }));
   };
-  const res = useSelector((state) => state.auth.userLogin);
-
-  const isLoading = useSelector((state) => state.auth.isLoading);
-  const error = useSelector((state) => state.auth.error);
 
 
+  // const res = useSelector((state) => state.auth.userLogin);
+
+  // const isLoading = useSelector((state) => state.auth.isLoading);
+  // const error = useSelector((state) => state.auth.error);
+
+  // console.log(res);
 
 
 
@@ -34,7 +38,8 @@ const Login = () => {
   const isLoadingOwner = useSelector((state) => state.auth.isLoading);
   const errorOwner = useSelector((state) => state.auth.error);
 
-  //console.log(res);
+ console.log(resOwner);
+
   //  console.log(res.data.token)
   // if (res && res.data) {
   //   console.log(res.data.token);
@@ -42,18 +47,30 @@ const Login = () => {
   // // console.log(res.message);
   // console.log(res.success);
 
-  //save data
+  //save data auth broker
+  // const OnSubmit = async (e) => {
+  //   e.preventDefault();
+   
+  //   await dispatch(
+  //     createLoginUser({
+  //       Registration_code
+  //     })
+  //   );
+  // };
+
+
+
+
+   //save data owner chalet
   const OnSubmit = async (e) => {
     e.preventDefault();
    
     await dispatch(
-      createLoginUser({
+      createUserOwnerChalet({
         Registration_code
       })
     );
   };
-
-
 
 
   return (

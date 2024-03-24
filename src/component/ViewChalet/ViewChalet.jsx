@@ -39,7 +39,6 @@ const ViewChalet = () => {
     return date.toLocaleDateString("ar", options); // Format the date in Arabic
   };
 
-
   
   // const getStatusBook = useSelector((state) => state.AllChalet.statusBook);
   // const isLoading = useSelector((state) => state.AllChalet.isLoading);
